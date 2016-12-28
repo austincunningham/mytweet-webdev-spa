@@ -7,6 +7,7 @@ import MyTweetService from '../services/mytweet-service';
 @inject(MyTweetService)
 export class tweet {
 
+  messageLength = 140;
   message = ' ';
   date = new Date();
   users = [];
@@ -22,5 +23,6 @@ export class tweet {
     console.log(`Message = ${this.message}`);
     let date = new Date();
     this.myTweetService.submitTweet(this.message, this.date);
+    let messageLength = 140 - this.message.length;
   }
 }
