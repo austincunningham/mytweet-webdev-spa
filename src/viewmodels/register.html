@@ -1,0 +1,20 @@
+<template>
+
+  <form submit.trigger="register()" class="ui form stacked segment">
+    <h3 class="ui dividing header"> Sign up new User </h3>
+    <div class="field">
+      <label>First Name </label> <input value.bind="firstName">
+    </div>
+    <div class="field">
+      <label>Last Name </label> <input value.bind="lastName">
+    </div>
+    <div class="field">
+      <label>Email </label> <input value.bind="email">
+    </div>
+    <div class="field">
+      <label>Password </label> <input value.bind="password">
+    </div>
+    <button class="ui blue submit button">Add</button>
+  </form>
+
+</template>

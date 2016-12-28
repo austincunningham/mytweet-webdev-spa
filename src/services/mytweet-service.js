@@ -25,10 +25,9 @@ export default class MyTweetService {
     console.log('registered ' + user.firstName + ' ' + user.lastName);
   }
 
-  submitTweet(message, user){
+  submitTweet(message, date) {
     let tweet = {
       message: message,
-      name: user.email,
       date: date
     };
     this.tweets.push(tweet);

@@ -8,6 +8,7 @@ import MyTweetService from '../services/mytweet-service';
 export class tweet {
 
   message = ' ';
+  date = new Date();
   users = [];
   tweets = [];
 
@@ -19,5 +20,7 @@ export class tweet {
 
   submitTweet() {
     console.log(`Message = ${this.message}`);
+    let date = new Date();
+    this.myTweetService.submitTweet(this.message, this.date);
   }
 }
