@@ -3,9 +3,9 @@
  */
 export class tweet {
 
-  amount = 5;
+  message = 'hello world';
 
-  makeDonation() {
-    console.log(`Amount = ${this.amount}`);
+  submitTweet() {
+    console.log(`Message = ${this.message}`);
   }
 }

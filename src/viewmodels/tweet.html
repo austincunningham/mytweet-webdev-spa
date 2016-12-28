@@ -2,12 +2,11 @@
   <section class="ui raised segment" xmlns="http://www.w3.org/1999/html">
     <div class="ui grid">
       <div class="ten wide column">
-        <form action="/tweet" class="ui form" method="post">
+        <form submit.trigger="submitTweet()" class="ui form" >
           <div class="ui form">
-            <div class="field">
+            <div  class="field">
               <label>Tweet</label>
-              <textarea rows="5" name="message" type="string" id="data"
-                        onkeyup="CharacterCount('data','count');">
+              <textarea rows="5" name="message" input type="string" value.bind="message" id="data">
 
                           </textarea>
             </div>
@@ -21,4 +20,4 @@
     </div>
   </section>
 </template>
-<script src="assets/javascript/characterCount.js"></script>
+
