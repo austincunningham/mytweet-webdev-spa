@@ -4,7 +4,6 @@
 import {inject} from 'aurelia-framework';
 import MyTweetService from '../../services/mytweet-service';
 
-
 @inject(MyTweetService)
 export class Signup {
 
