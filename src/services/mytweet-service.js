@@ -33,4 +33,24 @@ export default class MyTweetService {
     this.tweets.push(tweet);
     console.log('submitted tweet ' + tweet.message + ' from ' + tweet.name);
   }
+
+  login(email, password) {
+    const status = {
+      success: false,
+      message: ''
+    };
+
+    if (this.users[email]) {
+      if (this.users[email].password === password) {
+        status.success = true;
+        status.message = 'logged in';
+      } else {
+        status.message = 'Incorrect password';
+      }
+    } else {
+      status.message = 'Unknown user';
+    }
+
+    return status;
+  }
 }

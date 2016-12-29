@@ -3,18 +3,20 @@
  */
 export default class Fixtures {
 
-  users = [
-    {
+  users = {
+    'lisa@simpson.com': {
       firstName: 'Lisa',
       lastName: 'Simpson',
-      email: 'lisa@simpson.com'
+      email: 'lisa@simpson.com',
+      password: 'secret'
     },
-    {
+    'bart@simpson.com': {
       firstName: 'Bart',
       lastName: 'Simpson',
-      email: 'bart@simpson.com'
+      email: 'bart@simpson.com',
+      password: 'secret'
     }
-  ];
+  };
 
   tweets = [
     {
