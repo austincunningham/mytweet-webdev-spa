@@ -6,22 +6,25 @@ import {LoginStatus} from './services/messages';
 @inject(Aurelia, EventAggregator)
 export class App {
 
-  loggedIn = false;
-  showSignup = false;
-
-  constructor(ea, mts) {
-    this.myTweetService = mts;
-    ea.subscribe(LoginStatus, msg=>{
-      this.loggedIn = msg.status.success;
+  constructor(au, ea) {
+    ea.subscribe(LoginStatus, msg => {
+      if (msg.status.success === true) {
+        au.setRoot('home').then(() => {
+          this.router.navigateToRoute('tweet');
+        });
+      } else {
+        au.setRoot('app').then(() => {
+          this.router.navigateToRoute('login');
+        });
+      }
     });
   }
 
-  signup() {
-    this.showSignup = true;
-  }
-
-  logout() {
-    console.log('Logging out`');
-    this.loggedIn = false;
+  configureRouter(config, router) {
+    config.map([
+      { route: ['', 'login'], name: 'login', moduleId: 'viewmodels/login/login', nav: true, title: 'Login' },
+      { route: 'signup', name: 'signup', moduleId: 'viewmodels/signup/signup', nav: true, title: 'Signup' }
+    ]);
+    this.router = router;
   }
 }
