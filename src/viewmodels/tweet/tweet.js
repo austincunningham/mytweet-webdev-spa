@@ -8,7 +8,7 @@ import MyTweetService from '../../services/mytweet-service';
 export class tweet {
 
   messageLength = 140;
-  message = ' ';
+  message = '';
   date = new Date();
   users = [];
   tweets = [];
