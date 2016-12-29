@@ -4,19 +4,20 @@
 import {inject} from 'aurelia-framework';
 import MyTweetService from '../../services/mytweet-service';
 
-@inject(MyTweetService)
+
+@inject(EventAggregator, MyTweetService)
 export class tweet {
 
-  messageLength = 140;
   message = '';
   date = new Date();
   users = [];
   tweets = [];
 
-  constructor(mts){
+  constructor(ea, mts) {
     this.myTweetService = mts;
     this.users = mts.users;
     this.tweets = mts.tweets;
+    this.ea = ea;
   }
 
   submitTweet() {

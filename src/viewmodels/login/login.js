@@ -22,6 +22,6 @@ export class Login {
   login(e) {
     console.log(`Trying to log in ${this.email}`);
     const status = this.myTweetService.login(this.email, this.password);
-    this.ea.publish(new LoginStatus(status));
+    this.ea.publish(new LoginStatus(status, this.email));
   }
 }
