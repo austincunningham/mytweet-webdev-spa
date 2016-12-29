@@ -1,0 +1,39 @@
+<template>
+  <div class="ui container">
+
+    <nav class="ui inverted menu">
+      <header class="header item"><a href="/"> MyTweet </a></header>
+      <div class="right menu">
+        <div show.bind="!loggedIn">
+          <a class= "item" click.trigger="signup()"> SignUp</a>
+        </div>
+        <div show.bind="loggedIn">
+          <a class= "item" click.trigger="logout()"> Logout</a>
+        </div>
+      </div>
+    </nav>
+
+
+    <section class="ui two column stackable grid basic segment">
+      <div show.bind="!loggedIn" class="ui row">
+        <div show.bind="!showSignup" class="ui row">
+          <section class="ui two wide column">
+            <compose view-model="./viewmodels/login/login"></compose>
+          </section>
+        </div>
+        <div show.bind="showSignup" class="ui row">
+          <section class="ui two wide column">
+            <compose view-model="./viewmodels/signup/signup"></compose>
+          </section>
+        </div>
+      </div>
+      <div show.bind="loggedIn" class="ui row">
+          <aside class="column">
+            <compose view-model="./viewmodels/tweet/tweet"></compose>
+          </aside>
+          <article class="column">
+            <compose view-model="./viewmodels/report/report"></compose>
+          </article>
+        </section>
+      </div>
+</template>
