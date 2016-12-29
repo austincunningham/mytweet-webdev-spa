@@ -23,7 +23,7 @@ export default class MyTweetService {
     };
     this.users[email] = newUser;
     //this.users.push(user);
-    console.log('registered ' + user.firstName + ' ' + user.lastName);
+    //console.log('registered ' + newUser.firstName + ' ' + newUser.lastName);
   }
 
   submitTweet(message, date) {
