@@ -15,19 +15,21 @@ export default class MyTweetService {
   }
 
   register(firstName, lastName, email, password){
-    let user = {
+    let newUser = {
       firstName: firstName,
       lastName: lastName,
       email: email,
       password: password
     };
-    this.users.push(user);
+    this.users[email] = newUser;
+    //this.users.push(user);
     console.log('registered ' + user.firstName + ' ' + user.lastName);
   }
 
   submitTweet(message, date) {
     let tweet = {
       message: message,
+      name: this.email,
       date: date
     };
     this.tweets.push(tweet);

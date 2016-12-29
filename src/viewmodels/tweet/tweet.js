@@ -2,7 +2,7 @@
  * Created by austin on 28/12/2016.
  */
 import {inject} from 'aurelia-framework';
-import MyTweetService from '../services/mytweet-service';
+import MyTweetService from '../../services/mytweet-service';
 
 @inject(MyTweetService)
 export class tweet {
@@ -22,7 +22,6 @@ export class tweet {
   submitTweet() {
     console.log(`Message = ${this.message}`);
     let date = new Date();
-    this.myTweetService.submitTweet(this.message, this.date);
-    let messageLength = 140 - this.message.length;
+    this.myTweetService.submitTweet(this.message, this.date, this.email);
   }
 }
