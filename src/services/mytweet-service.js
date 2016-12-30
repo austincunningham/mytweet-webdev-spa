@@ -8,10 +8,12 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import AsyncHttpClient from './async-http-client';
 
 
+
 @inject(Fixtures, EventAggregator, AsyncHttpClient)
 export default class MyTweetService {
   users = []
   tweets = []
+
   //user = undefined;
 
   constructor(data, ea, ac) {
