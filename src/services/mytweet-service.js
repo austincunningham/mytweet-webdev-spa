@@ -56,9 +56,16 @@ export default class MyTweetService {
       success: false,
       message: 'Login Attempt Failed'
     };
-
+    const user = {
+      'email': email,
+      'password': password
+    }
+    let logon = this.ac.post('/api/users/login', user).then(res => {
+      logon = res.content;
+      return logon;
+    });
     for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].email === email && this.users[i].password === password) {
+      if (this.users[i].email === email && logon) {
         status.success = true;
         status.message = 'logged in';
       } else {
