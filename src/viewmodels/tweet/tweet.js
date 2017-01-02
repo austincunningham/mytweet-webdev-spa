@@ -3,9 +3,10 @@
  */
 import {inject} from 'aurelia-framework';
 import MyTweetService from '../../services/mytweet-service';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {LoginStatus} from '../../services/messages';
 
-
-@inject( MyTweetService)
+@inject( MyTweetService, EventAggregator)
 export class tweet {
 
   message = '';
@@ -13,16 +14,21 @@ export class tweet {
   users = [];
   tweets = [];
 
-  constructor(mts) {
+  constructor(mts, ea) {
     this.myTweetService = mts;
     this.users = mts.users;
     this.tweets = mts.tweets;
-
+    this.ea = ea;
+    ea.subscribe(LoginStatus, event =>{
+      console.log('Do i see an email : ' + event.email);
+      this.email = event.email;
+    });
   }
 
   submitTweet() {
     console.log(`Message = ${this.message}`);
     let date = new Date();
+    console.log('Do I see an email address ' + this.email);
     this.myTweetService.submitTweet(this.message, this.date, this.email);
   }
 }

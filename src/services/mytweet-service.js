@@ -41,16 +41,6 @@ export default class MyTweetService {
     //console.log('registered ' + newUser.firstName + ' ' + newUser.lastName);
   }
 
-  submitTweet(message, date) {
-    let tweet = {
-      message: message,
-      //name: user.email,
-      date: date
-    };
-    this.tweets.push(tweet);
-    console.log('submitted tweet ' + tweet.message + ' from ' + tweet.name);
-  }
-
   login(email, password) {
     const status = {
       success: false,
@@ -72,7 +62,17 @@ export default class MyTweetService {
         status.message = 'Incorrect password';
       }
     }
-    this.ea.publish(new LoginStatus(status));
+    this.ea.publish(new LoginStatus(status, email));
+  }
+
+  submitTweet(message, date, email) {
+    let tweet = {
+      message: message,
+      name: email,
+      date: date
+    };
+    this.tweets.push(tweet);
+    console.log('submitted tweet ' + tweet.message + ' from ' + tweet.name);
   }
 
   logout() {

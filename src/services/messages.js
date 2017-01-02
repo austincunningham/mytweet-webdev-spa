@@ -4,7 +4,8 @@
 
 
 export class LoginStatus {
-  constructor(status) {
+  constructor(status, email) {
     this.status = status;
+    this.email = email;
   }
 }
