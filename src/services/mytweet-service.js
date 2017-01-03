@@ -7,14 +7,11 @@ import {LoginStatus} from './messages';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import AsyncHttpClient from './async-http-client';
 
-
-
 @inject(Fixtures, EventAggregator, AsyncHttpClient)
 export default class MyTweetService {
   users = []
   tweets = []
-
-  //user = undefined;
+  user = undefined;
 
   constructor(data, ea, ac) {
     //this.users = data.users;
@@ -52,17 +49,17 @@ export default class MyTweetService {
     }
     let logon = this.ac.post('/api/users/login', user).then(res => {
       logon = res.content;
-      return logon;
-    });
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].email === email && logon) {
-        status.success = true;
-        status.message = 'logged in';
-      } else {
-        status.message = 'Incorrect password';
+      for (let i = 0; i < this.users.length; i++) {
+        if (this.users[i].email === email && logon) {
+          this.user = user;
+          status.success = true;
+          status.message = 'logged in';
+        } else {
+          status.message = 'Incorrect password';
+        }
       }
-    }
-    this.ea.publish(new LoginStatus(status, email));
+      this.ea.publish(new LoginStatus(status, email));
+    });
   }
 
   submitTweet(message, date, email) {

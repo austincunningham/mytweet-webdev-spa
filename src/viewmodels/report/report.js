@@ -4,8 +4,9 @@
 import {inject} from 'aurelia-framework';
 import MyTweetService from '../../services/mytweet-service';
 
-@inject(MyTweetService , EventAggregator)
-export class Report{
+
+@inject(MyTweetService)
+export class Report {
   tweets = [];
 
   constructor(mts) {

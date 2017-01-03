@@ -18,17 +18,20 @@ export class tweet {
     this.myTweetService = mts;
     this.users = mts.users;
     this.tweets = mts.tweets;
+    this.user = mts.user;
     this.ea = ea;
-    ea.subscribe(LoginStatus, event =>{
-      console.log('Do i see an email : ' + event.email);
-      this.email = event.email;
-    });
   }
 
-  submitTweet() {
+  submitTweet(){
     console.log(`Message = ${this.message}`);
     let date = new Date();
-    console.log('Do I see an email address ' + this.email);
-    this.myTweetService.submitTweet(this.message, this.date, this.email);
+    console.log('Do I see an email address ' + this.user.email);
+    this.ea.subscribe(LoginStatus, msg => {
+      console.log('msg.email' + msg.email);
+      return msg.email;
+    });
+    this.myTweetService.submitTweet(this.message, this.date, this.user.email);
   }
-}
+};
+
+
