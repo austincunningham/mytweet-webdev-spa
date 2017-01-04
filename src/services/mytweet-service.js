@@ -116,7 +116,7 @@ export default class MyTweetService {
     }
   }
 
-  settings(firstName, lastName, email, password, _id){
+  settings(firstName, lastName, email, password, _id) {
     let editedUser = {
       firstName: firstName,
       lastName: lastName,
