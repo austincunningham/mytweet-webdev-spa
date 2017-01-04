@@ -20,4 +20,8 @@ export class Report {
     this.alltweets = mts.alltweets;
     this.alltweets = this.myTweetService.alltweets;
   }
+
+  follow(id) {
+    this.myTweetService.follow(id);
+  }
 }

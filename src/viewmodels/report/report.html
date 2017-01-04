@@ -7,12 +7,25 @@
         <tr>
           <th>Message</th>
           <th>Tweeter</th>
+          <th>Follow</th>
+          <th>Following</th>
         </tr>
         </thead>
         <tbody>
         <tr repeat.for="tweet of alltweets">
           <td> ${tweet.message} <h6>${tweet.date}</h6></td>
           <td> ${tweet.name}</td>
+          <td>
+            <form submit.trigger="follow(tweet.tweeter)" class="ui form" method="post">
+              <button  class="ui black active button">
+                <i class="icon add user"></i> Follow
+              </button>
+              ${tweet.name}
+            </form>
+          </td>
+          <td repeat.for="follow of users.following">
+            ${follow._id}
+          </td>
         </tr>
         </tbody>
       </table>

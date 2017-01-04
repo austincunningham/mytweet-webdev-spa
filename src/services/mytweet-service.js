@@ -129,4 +129,10 @@ export default class MyTweetService {
       this.getUsers();
     });
   }
+
+  follow(id) {
+    this.ac.post('/api/users/follow/' + id, this.user).then(res => {
+      this.getUsers();
+    });
+  }
 }
