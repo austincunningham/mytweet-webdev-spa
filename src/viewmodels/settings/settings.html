@@ -1,7 +1,7 @@
 <template>
 
-  <form submit.delegate="register($event)" class="ui form stacked segment">
-    <h3 class="ui dividing header"> Sign up new User </h3>
+  <form submit.delegate="settings($event)" class="ui form stacked segment">
+    <h3 class="ui dividing header"> Update Users Details </h3>
     <div class="field">
       <label>First Name </label> <input value.bind="firstName">
     </div>
@@ -14,7 +14,7 @@
     <div class="field">
       <label>Password </label> <input value.bind="password">
     </div>
-    <button class="ui black submit button">Add</button>
+    <button class="ui black submit button">Update</button>
   </form>
 
 </template>

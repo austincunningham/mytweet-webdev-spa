@@ -21,7 +21,7 @@ export class FindUserTweets {
     this.mytweets = this.myTweetService.mytweets;
   }
 
-  findUser(){
+  findUser() {
     console.log(`email = ${this.email}`);
     this.myTweetService.findUser(this.email);
   }

@@ -54,7 +54,7 @@ export default class MyTweetService {
       logon = res.content;
       for (let i = 0; i < this.users.length; i++) {
         if (this.users[i].email === email && logon) {
-          this.user = user;
+          this.user = this.users[i];
           status.success = true;
           status.message = 'logged in';
         } else {
@@ -114,5 +114,19 @@ export default class MyTweetService {
         this.mytweets.push(this.tweets[i]);
       }
     }
+  }
+
+  settings(firstName, lastName, email, password, _id){
+    let editedUser = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      _id: _id
+    };
+
+    this.ac.post('/api/users/settings', editedUser).then(res => {
+      this.getUsers();
+    });
   }
 }
