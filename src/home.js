@@ -15,7 +15,7 @@ export class Home {
       { route: ['', 'home'], name: 'tweet', moduleId: 'viewmodels/tweet/tweet', nav: true, title: 'Tweet' },
       { route: 'report', name: 'report', moduleId: 'viewmodels/report/report', nav: true, title: 'All Tweets' },
       { route: 'mytweets', name: 'mytweets', moduleId: 'viewmodels/mytweets/mytweets', nav: true, title: 'My Tweets' },
-      { route: 'findusertweet', name: 'findusertweet', moduleId: 'viewmodels/findusertweet/findusertweet', nav: true, title: 'Find User Tweets' },
+      { route: 'findusertweets', name: 'findusertweets', moduleId: 'viewmodels/findusertweets/findusertweets', nav: true, title: 'Find User Tweets' },
       { route: 'logout', name: 'logout', moduleId: 'viewmodels/logout/logout', nav: true, title: 'Logout' }
 
     ]);

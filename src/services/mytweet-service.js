@@ -14,6 +14,7 @@ export default class MyTweetService {
   user = undefined;
   mytweets = [];
   alltweets = [];
+  email = '';
 
   constructor(data, ea, ac) {
     //this.users = data.users;
@@ -103,5 +104,15 @@ export default class MyTweetService {
     this.ac.get('/api/users').then(res => {
       this.users = res.content;
     });
+  }
+
+  findUser(email) {
+    this.email = email;
+    for (let i = 0; i < this.tweets.length; i++) {
+      if (this.tweets[i].name === this.email) {
+        this.tweets[i].date = new Date(this.tweets[i].date);
+        this.mytweets.push(this.tweets[i]);
+      }
+    }
   }
 }

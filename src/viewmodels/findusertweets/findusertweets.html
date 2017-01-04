@@ -1,40 +1,37 @@
-</script>
+<template>
 <div class="ui segment">
-  <div class="ui form">
-    <form action="/finduser" method="post">
-      <div class="ui rasied segment">
+  <div class="ten wide column">
+    <form submit.trigger="findUser()" class="ui form" >
       <div class="ui form">
-    <form action="/finduser" method="post">
-      <div class="ui right icon input field">
-        <input placeholder="Email Address" name="name" type="text"> <i class="user icon"></i>
+        <div  class="field">
+          <label>User Email Address</label>
+          <field >
+            <input type="text" name="email" value.bind="email" id="data" >
+          </field>
+        </div>
       </div>
-      <button class="ui blue submit button">Search <i class="search icon"></i></button>
+      <button  class="ui blue labeled submit icon button">
+        <i class="icon edit"></i> Submit
+      </button>
     </form>
-  </div>
-  </div>
-  <section class="ui raised segment">
-    <div class="ui grid">
-      <aside class="six wide column">
-        <img src="images/tweetLogo.png" class="ui small image">
-        <section class="ui  segment">
-          <div class="ui segment">
-            <div id="chartContainer" style="height: 220px; width: 100%;"></div>
-          </div>
-        </section>
-      </aside>
-    <article class="ten wide column">
-    <table class="ui fixed inverted blue celled table segment">
-      <thead>
-        <tr>
-          <th>Tweet</th>
-          <th>Name</th>
-          <th>Following</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-    </article>
-   </div>
-  </section>
-
+    <section class="ui raised segment">
+      <div class="ui grid">
+        <article class="fourteen wide column">
+          <table class="ui fixed celled table segment">
+            <thead>
+            <tr>
+              <th>Tweet</th>
+              <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr repeat.for="tweet of mytweets">
+              <td> ${tweet.message} <h6>${tweet.date}</h6></td>
+              <td> ${tweet.name}</td>
+            </tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
+    </section>
+</template>
