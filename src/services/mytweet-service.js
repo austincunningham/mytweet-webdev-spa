@@ -9,9 +9,11 @@ import AsyncHttpClient from './async-http-client';
 
 @inject(Fixtures, EventAggregator, AsyncHttpClient)
 export default class MyTweetService {
-  users = []
-  tweets = []
+  users = [];
+  tweets = [];
   user = undefined;
+  mytweets = [];
+  alltweets = [];
 
   constructor(data, ea, ac) {
     //this.users = data.users;

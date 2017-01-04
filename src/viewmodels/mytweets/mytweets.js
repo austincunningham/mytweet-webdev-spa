@@ -6,17 +6,21 @@ import MyTweetService from '../../services/mytweet-service';
 
 
 @inject(MyTweetService)
-export class Report {
+export class MyTweet {
   tweets = [];
+  myTweets = [];
 
   constructor(mts) {
     this.myTweetService = mts;
     this.user = mts.user;
-    for (let i = 0; i < tweets.length; i++) {
-      if (tweets[i].name === this.user.email) {
-        this.tweets.push(tweets[i]);
+    mts.myTweets = [];
+    for (let i = 0; i < mts.tweets.length; i++) {
+      if (mts.tweets[i].name === this.user.email) {
+        mts.tweets[i].date = new Date(mts.tweets[i].date);
+        mts.mytweets.push(mts.tweets[i]);
       }
     }
-    this.tweets = this.myTweetService.tweets;
+    this.myTweets = mts.mytweets;
+    this.mytweets = this.myTweetService.mytweets;
   }
 }

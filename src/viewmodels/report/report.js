@@ -8,9 +8,16 @@ import MyTweetService from '../../services/mytweet-service';
 @inject(MyTweetService)
 export class Report {
   tweets = [];
+  alltweets = [];
 
   constructor(mts) {
     this.myTweetService = mts;
-    this.tweets = this.myTweetService.tweets;
+    mts.alltweets = [];
+    for (let i = 0; i < mts.tweets.length; i++) {
+        mts.tweets[i].date = new Date(mts.tweets[i].date);
+        mts.alltweets.push(mts.tweets[i]);
+    }
+    this.alltweets = mts.alltweets;
+    this.alltweets = this.myTweetService.alltweets;
   }
 }
