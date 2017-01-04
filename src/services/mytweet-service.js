@@ -62,13 +62,24 @@ export default class MyTweetService {
     });
   }
 
-  submitTweet(message, date, email) {
+  submitTweet(message, date, email, number) {
     let tweet = {
       message: message,
       name: email,
+      id: number,
       date: date
     };
-    this.tweets.push(tweet);
+
+    tweet.date = Number(date);
+    tweet.id = Math.floor(Math.random() * 1000000000);
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.user.email === this.users[i].email) {
+        this.tweets.push(tweet);
+        this.ac.post('/api/tweet/' + this.users[i]._id, tweet).then(res => {
+          this.getTweets();
+        });
+      }
+    }
     console.log('submitted tweet ' + tweet.message + ' from ' + tweet.name);
   }
 

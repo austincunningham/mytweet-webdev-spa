@@ -26,10 +26,6 @@ export class tweet {
     console.log(`Message = ${this.message}`);
     let date = new Date();
     console.log('Do I see an email address ' + this.user.email);
-    this.ea.subscribe(LoginStatus, msg => {
-      console.log('msg.email' + msg.email);
-      return msg.email;
-    });
     this.myTweetService.submitTweet(this.message, this.date, this.user.email);
   }
 };
