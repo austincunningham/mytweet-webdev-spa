@@ -15,6 +15,12 @@ export class Following {
     mts.alltweets = [];
     this.user = mts.user;
     this.users = mts.users;
+    for (let x = 0; x < this.users.length; x++) {
+      if ( this.users[x].email === this.user.email) {
+        this.user = this.users[x];
+      }
+    }
+
     for (let i = 0; i < mts.tweets.length; i++) {
       mts.tweets[i].date = new Date(mts.tweets[i].date);
       for (let j = 0; j < this.user.following.length; j++) {

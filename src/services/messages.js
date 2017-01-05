@@ -9,3 +9,9 @@ export class LoginStatus {
     this.email = email;
   }
 }
+
+export class FollowingStatus {
+  constructor(status) {
+    this.status = status;
+  }
+}

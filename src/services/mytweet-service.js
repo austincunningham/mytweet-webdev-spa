@@ -4,6 +4,7 @@
 import {inject} from 'aurelia-framework';
 import Fixtures from './fixtures';
 import {LoginStatus} from './messages';
+import {FollowingStatus} from './messages';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import AsyncHttpClient from './async-http-client';
 
@@ -133,19 +134,20 @@ export default class MyTweetService {
   follow(id) {
     const status = {
       success: false,
-      message: 'Login Attempt Failed'
+      message: 'Following Attempt Failed'
     };
     this.ac.post('/api/users/follow/' + id, this.user).then(res => {
       this.getUsers();
-    });
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].email === this.user.email) {
-        this.user = this.users[i];
-        status.success = true;
-        status.message = 'logged in';
+      this.alltweets = [];
+      for (let i = 0; i < this.users.length; i++) {
+        if (this.users[i].email === this.user.email) {
+          this.user = this.users[i];
+          status.success = true;
+          status.message = 'logged in';
+        }
       }
-    }
-    this.ea.publish(new LoginStatus(status, this.user.email));
+      this.ea.publish(new LoginStatus(status, this.user.email));
+    });
   }
 
 
@@ -156,14 +158,16 @@ export default class MyTweetService {
     };
     this.ac.post('/api/users/unfollow/' + id, this.user).then(res =>{
       this.getUsers();
-    });
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].email === this.user.email) {
-        this.user = this.users[i];
-        status.success = true;
-        status.message = 'logged in';
+      this.alltweets = [];
+      for (let i = 0; i < this.users.length; i++) {
+        if (this.users[i].email === this.user.email) {
+          this.user = this.users[i];
+          status.success = true;
+          status.message = 'logged in';
+        }
       }
-    }
-    this.ea.publish(new LoginStatus(status, this.user.email));
+      this.ea.publish(new LoginStatus(status, this.user.email));
+    });
+
   }
 }
