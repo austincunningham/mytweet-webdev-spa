@@ -13,9 +13,9 @@
         <tr repeat.for="tweet of alltweets">
           <td> ${tweet.message} <h6>${tweet.date}</h6></td>
           <td>
-            <form submit.trigger="follow(tweet.tweeter)" class="ui form" method="post">
+            <form submit.trigger="unfollow(tweet.tweeter)" class="ui form" method="post">
               <button  class="ui black active button">
-                <i class="icon add user"></i> Follow
+                <i class="remove user icon"></i> Unfollow
               </button>
               ${tweet.name}
             </form>

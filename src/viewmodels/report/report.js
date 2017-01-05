@@ -17,6 +17,7 @@ export class Report {
         mts.tweets[i].date = new Date(mts.tweets[i].date);
         mts.alltweets.push(mts.tweets[i]);
     }
+    this.users = mts.users;
     this.alltweets = mts.alltweets;
     this.alltweets = this.myTweetService.alltweets;
   }

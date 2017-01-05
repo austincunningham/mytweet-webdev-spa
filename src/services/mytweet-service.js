@@ -25,7 +25,7 @@ export default class MyTweetService {
     this.getUsers();
   }
 
-  register(firstName, lastName, email, password){
+  register(firstName, lastName, email, password) {
     let newUser = {
       firstName: firstName,
       lastName: lastName,
@@ -49,9 +49,9 @@ export default class MyTweetService {
     const user = {
       'email': email,
       'password': password
-    }
-    let logon = this.ac.post('/api/users/login', user).then(res => {
-      logon = res.content;
+    };
+    this.ac.post('/api/users/login', user).then(res => {
+      let logon = res.content;
       for (let i = 0; i < this.users.length; i++) {
         if (this.users[i].email === email && logon) {
           this.user = this.users[i];
@@ -131,8 +131,39 @@ export default class MyTweetService {
   }
 
   follow(id) {
+    const status = {
+      success: false,
+      message: 'Login Attempt Failed'
+    };
     this.ac.post('/api/users/follow/' + id, this.user).then(res => {
       this.getUsers();
     });
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i].email === this.user.email) {
+        this.user = this.users[i];
+        status.success = true;
+        status.message = 'logged in';
+      }
+    }
+    this.ea.publish(new LoginStatus(status, this.user.email));
+  }
+
+
+  unfollow(id) {
+    const status = {
+      success: false,
+      message: 'Login Attempt Failed'
+    };
+    this.ac.post('/api/users/unfollow/' + id, this.user).then(res =>{
+      this.getUsers();
+    });
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i].email === this.user.email) {
+        this.user = this.users[i];
+        status.success = true;
+        status.message = 'logged in';
+      }
+    }
+    this.ea.publish(new LoginStatus(status, this.user.email));
   }
 }

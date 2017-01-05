@@ -3,4 +3,5 @@
  */
 export default class Fixtures {
   baseUrl = 'http://localhost:4000';
+  //baseUrl = 'http://35.160.157.123:4000';
 }
