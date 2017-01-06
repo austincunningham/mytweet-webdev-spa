@@ -12,6 +12,8 @@ export class Report {
 
   constructor(mts) {
     this.myTweetService = mts;
+    mts.getTweets();
+    mts.getUsers();
     mts.alltweets = [];
     for (let i = 0; i < mts.tweets.length; i++) {
         mts.tweets[i].date = new Date(mts.tweets[i].date);

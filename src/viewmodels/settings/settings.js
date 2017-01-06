@@ -15,6 +15,8 @@ export class Settings {
 
   constructor(mts) {
     this.myTweetService = mts;
+    mts.getTweets();
+    mts.getUsers();
     this.user = mts.user;
     this.firstName = this.user.firstName;
     this.lastName = this.user.lastName;

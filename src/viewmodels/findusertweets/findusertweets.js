@@ -17,6 +17,8 @@ export class FindUserTweets {
 
   constructor(mts) {
     this.myTweetService = mts;
+    mts.getTweets();
+    mts.getUsers();
     mts.mytweets = [];
     this.mytweets = this.myTweetService.mytweets;
   }

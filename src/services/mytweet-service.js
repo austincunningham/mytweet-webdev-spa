@@ -22,8 +22,8 @@ export default class MyTweetService {
     //this.tweets = data.tweets;
     this.ea = ea;
     this.ac = ac;
-    this.getTweets();
-    this.getUsers();
+/*    this.getTweets();
+    this.getUsers();*/
   }
 
   register(firstName, lastName, email, password) {
@@ -43,27 +43,12 @@ export default class MyTweetService {
   }
 
   login(email, password) {
-    const status = {
-      success: false,
-      message: 'Login Attempt Failed'
-    };
     const user = {
       'email': email,
       'password': password
     };
-    this.ac.post('/api/users/login', user).then(res => {
-      let logon = res.content;
-      for (let i = 0; i < this.users.length; i++) {
-        if (this.users[i].email === email && logon) {
-          this.user = this.users[i];
-          status.success = true;
-          status.message = 'logged in';
-        } else {
-          status.message = 'Incorrect password';
-        }
-      }
-      this.ea.publish(new LoginStatus(status, email));
-    });
+    this.ac.authenticate('/api/users/login', user);
+    this.user = user;
   }
 
   submitTweet(message, date, email, number) {
@@ -92,7 +77,8 @@ export default class MyTweetService {
       success: false,
       message: ''
     };
-    this.ea.publish(new LoginStatus(status));
+    this.ac.clearAuthentication();
+    this.ea.publish(new LoginStatus(new LoginStatus(status)));
   }
 
   getTweets() {

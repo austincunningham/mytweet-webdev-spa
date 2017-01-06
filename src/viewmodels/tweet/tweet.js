@@ -16,13 +16,15 @@ export class tweet {
 
   constructor(mts, ea) {
     this.myTweetService = mts;
+    mts.getTweets();
+    mts.getUsers();
     this.users = mts.users;
     this.tweets = mts.tweets;
     this.user = mts.user;
     this.ea = ea;
   }
 
-  submitTweet(){
+  submitTweet() {
     console.log(`Message = ${this.message}`);
     let date = new Date();
     console.log('Do I see an email address ' + this.user.email);

@@ -12,6 +12,8 @@ export class Following {
 
   constructor(mts) {
     this.myTweetService = mts;
+    mts.getTweets();
+    mts.getUsers();
     mts.alltweets = [];
     this.user = mts.user;
     this.users = mts.users;
