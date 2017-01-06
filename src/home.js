@@ -20,6 +20,11 @@ export class Home {
       { route: 'settings', name: 'settings', moduleId: 'viewmodels/settings/settings', nav: true, title: 'Settings' },
       { route: 'logout', name: 'logout', moduleId: 'viewmodels/logout/logout', nav: true, title: 'Logout' }
     ]);
+
+    config.mapUnknownRoutes(instruction => {
+      return 'dashboard';
+    });
+
     this.router = router;
   }
 }

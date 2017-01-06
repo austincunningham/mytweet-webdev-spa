@@ -154,6 +154,9 @@ export default class MyTweetService {
       }
       this.ea.publish(new LoginStatus(status, this.user.email));
     });
+  }
 
+  isAuthenticated() {
+    return this.ac.isAuthenticated();
   }
 }

@@ -34,7 +34,7 @@ export default class AsyncHttpClient {
     this.http.post(url, user).then(response => {
       const status = response.content;
       if (status.success) {
-        localStorage.donation = JSON.stringify(response.content);
+        localStorage.mytweet = JSON.stringify(response.content);
         this.http.configure(configuration => {
           configuration.withHeader('Authorization', 'bearer ' + response.content.token);
         });
@@ -50,9 +50,21 @@ export default class AsyncHttpClient {
   }
 
   clearAuthentication() {
-    localStorage.donation = null;
+    localStorage.mytweet = null;
     this.http.configure(configuration => {
       configuration.withHeader('Authorization', '');
     });
+  }
+
+  isAuthenticated() {
+    let authenticated = false;
+    if (localStorage.mytweet !== 'null') {
+      authenticated = true;
+      this.http.configure(http => {
+        const auth = JSON.parse(localStorage.mytweet);
+        http.withHeader('Authorization', 'bearer ' + auth.token);
+      });
+    }
+    return authenticated;
   }
 }
