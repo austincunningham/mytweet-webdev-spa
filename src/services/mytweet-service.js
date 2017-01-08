@@ -4,6 +4,7 @@
 import {inject} from 'aurelia-framework';
 import Fixtures from './fixtures';
 import {LoginStatus} from './messages';
+import {DeleteStatus} from './messages';
 import {FollowingStatus} from './messages';
 import {TweetStatus} from './messages';
 import {EventAggregator} from 'aurelia-event-aggregator';
@@ -148,7 +149,6 @@ export default class MyTweetService {
           this.ea.publish(new FollowingStatus(status, this.user));
         }
       }
-
     });
   }
 
@@ -174,5 +174,50 @@ export default class MyTweetService {
 
   isAuthenticated() {
     return this.ac.isAuthenticated();
+  }
+
+
+  deleteTweet(id) {
+    const status = {
+      success: false,
+      message: 'Delete Attempt Failed'
+    };
+
+    this.ac.delete('/api/tweets/' + id, this.user).then(res =>{
+      this.getUsers();
+      this.getTweets();
+      for (let i = 0; i < this.users.length; i++) {
+        if (this.users[i].email === this.user.email) {
+          this.user = this.users[i];
+          status.success = true;
+          status.message = 'Tweet deleted';
+          this.ea.publish(new DeleteStatus(status, this.user));
+        }
+      }
+    });
+  }
+
+
+  deleteAllTweets(user) {
+    const status = {
+      success: false,
+      message: 'Delete Attempt Failed'
+    };
+    for (let j = 0; j < this.tweets.length; j++) {
+      if (this.tweets[j].name === this.user.email) {
+        this.ac.delete('/api/tweets/' + this.tweets[j]._id, this.user).then(res => {
+          this.getUsers();
+          this.getTweets();
+          for (let i = 0; i < this.users.length; i++) {
+            if (this.users[i].email === this.user.email) {
+              this.user = this.users[i];
+              status.success = true;
+              status.message = 'Tweet deleted';
+              this.ea.publish(new DeleteStatus(status, this.user));
+            }
+          }
+        });
+      }
+    }
   }
 }

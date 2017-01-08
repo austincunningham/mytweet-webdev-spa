@@ -25,4 +25,12 @@ export class MyTweet {
     this.mytweets = mts.mytweets;
     this.mytweets = this.myTweetService.mytweets;
   }
+
+  deleteTweet(id) {
+    this.myTweetService.deleteTweet(id);
+  }
+
+  deleteAllTweets(){
+    this.myTweetService.deleteAllTweets(this.user);
+  }
 }

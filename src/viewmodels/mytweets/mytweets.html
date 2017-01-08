@@ -1,4 +1,10 @@
 <template>
+  <script>
+    $('.ui.checkbox')
+    .checkbox()
+  ;
+  </script>
+
 
   <section class="ui stacked segment">
     <article class="eight wide column">
@@ -7,15 +13,29 @@
         <tr>
           <th>Message</th>
           <th>Tweeter</th>
+          <th>Press for Deletion
+          </th>
         </tr>
         </thead>
         <tbody>
         <tr repeat.for="tweet of mytweets">
           <td> ${tweet.message} <h6>${tweet.date}</h6></td>
           <td> ${tweet.name}</td>
+          <td>
+            <form submit.trigger="deleteTweet(tweet._id)" class="ui form" method="post">
+              <button  class="ui black active button">
+                <i class="icon trash"></i> Delete
+              </button>
+            </form>
+          </td>
         </tr>
         </tbody>
       </table>
+      <form submit.trigger="deleteAllTweets()" class="ui form" method="post">
+        <button  class="ui black active button">
+          <i class="icon trash"></i> Delete All Tweets
+        </button>
+      </form>
     </article>
   </section>
 

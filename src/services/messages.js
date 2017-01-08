@@ -22,3 +22,10 @@ export class TweetStatus {
     this.status = status;
   }
 }
+
+export class DeleteStatus {
+  constructor(status, user) {
+    this.status = status;
+    this.user = user;
+  }
+}

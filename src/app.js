@@ -2,6 +2,7 @@ import {inject, Aurelia} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {LoginStatus} from './services/messages';
 import {TweetStatus} from './services/messages';
+import {DeleteStatus} from './services/messages';
 import {FollowingStatus} from './services/messages';
 import MyTweetService from './services/mytweet-service';
 
@@ -39,10 +40,14 @@ export class App {
         au.setRoot('home').then(() => {
           this.router.navigateToRoute('report');
         });
-      /*} else {
+      }
+    });
+
+    ea.subscribe(DeleteStatus, msg => {
+      if (msg.status.success === true) {
         au.setRoot('home').then(() => {
           this.router.navigateToRoute('tweet');
-        });*/
+        });
       }
     });
   }
