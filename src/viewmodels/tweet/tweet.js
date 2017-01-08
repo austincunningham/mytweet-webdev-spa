@@ -27,7 +27,7 @@ export class tweet {
   submitTweet() {
     console.log(`Message = ${this.message}`);
     let date = new Date();
-    console.log('Do I see an email address ' + this.user.email);
+    //console.log('Do I see an email address ' + this.user.email);
     this.myTweetService.submitTweet(this.message, this.date, this.user.email);
   }
 };

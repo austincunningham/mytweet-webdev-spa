@@ -11,6 +11,13 @@ export class LoginStatus {
 }
 
 export class FollowingStatus {
+  constructor(status, user) {
+    this.status = status;
+    this.user = user;
+  }
+}
+
+export class TweetStatus {
   constructor(status) {
     this.status = status;
   }

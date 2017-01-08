@@ -1,6 +1,8 @@
 import {inject, Aurelia} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {LoginStatus} from './services/messages';
+import {TweetStatus} from './services/messages';
+import {FollowingStatus} from './services/messages';
 import MyTweetService from './services/mytweet-service';
 
 @inject(MyTweetService, Aurelia, EventAggregator)
@@ -19,6 +21,23 @@ export class App {
           this.router.navigateToRoute('login');
         });
       }
+    });
+    ea.subscribe(FollowingStatus, msg =>{
+      if (msg.status.success === true) {
+        au.setRoot('home').then(() => {
+          this.router.navigateToRoute('following');
+        });
+      } else {
+        au.setRoot('home').then(() => {
+          this.router.navigateToRoute('report');
+        });
+      }
+    });
+
+    ea.subscribe(TweetStatus, msg => {
+      au.setRoot('home').then(() => {
+        this.router.navigateToRoute('report');
+      });
     });
   }
 

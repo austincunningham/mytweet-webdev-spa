@@ -5,6 +5,7 @@ import {inject} from 'aurelia-framework';
 import Fixtures from './fixtures';
 import {LoginStatus} from './messages';
 import {FollowingStatus} from './messages';
+import {TweetStatus} from './messages';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import AsyncHttpClient from './async-http-client';
 
@@ -36,7 +37,6 @@ export default class MyTweetService {
     this.users[email] = newUser;
     this.ac.post('/api/users/register', newUser).then(res => {
       this.getUsers();
-      //newUser = user;
     });
     //this.users.push(user);
     //console.log('registered ' + newUser.firstName + ' ' + newUser.lastName);
@@ -58,11 +58,17 @@ export default class MyTweetService {
       id: number,
       date: date
     };
+    const status = {
+      success: false,
+      message: ''
+    };
 
     tweet.date = Number(date);
     tweet.id = Math.floor(Math.random() * 1000000000);
     for (let i = 0; i < this.users.length; i++) {
       if (this.user.email === this.users[i].email) {
+        status.success = true;
+        status.message = 'Tweet';
         this.tweets.push(tweet);
         this.ac.post('/api/tweet/' + this.users[i]._id, tweet).then(res => {
           this.getTweets();
@@ -70,6 +76,7 @@ export default class MyTweetService {
       }
     }
     console.log('submitted tweet ' + tweet.message + ' from ' + tweet.name);
+    this.ea.publish(new TweetStatus(status));
   }
 
   logout() {
@@ -78,7 +85,7 @@ export default class MyTweetService {
       message: ''
     };
     this.ac.clearAuthentication();
-    this.ea.publish(new LoginStatus(new LoginStatus(status)));
+    this.ea.publish(new LoginStatus(status));
   }
 
   getTweets() {
@@ -112,8 +119,16 @@ export default class MyTweetService {
       _id: _id
     };
 
+    const status = {
+      success: false,
+      message: ''
+    };
+
     this.ac.post('/api/users/settings', editedUser).then(res => {
       this.getUsers();
+      status.success = true;
+      status.message = 'User updated';
+      this.ea.publish(new LoginStatus(status));
     });
   }
 
@@ -129,10 +144,11 @@ export default class MyTweetService {
         if (this.users[i].email === this.user.email) {
           this.user = this.users[i];
           status.success = true;
-          status.message = 'logged in';
+          status.message = 'following';
+          this.ea.publish(new FollowingStatus(status, this.user));
         }
       }
-      this.ea.publish(new LoginStatus(status, this.user.email));
+
     });
   }
 
@@ -148,11 +164,11 @@ export default class MyTweetService {
       for (let i = 0; i < this.users.length; i++) {
         if (this.users[i].email === this.user.email) {
           this.user = this.users[i];
-          status.success = true;
+          status.success = false;
           status.message = 'logged in';
+          this.ea.publish(new FollowingStatus(status, this.user));
         }
       }
-      this.ea.publish(new LoginStatus(status, this.user.email));
     });
   }
 

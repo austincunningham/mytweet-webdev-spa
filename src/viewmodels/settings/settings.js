@@ -18,6 +18,11 @@ export class Settings {
     mts.getTweets();
     mts.getUsers();
     this.user = mts.user;
+    for (let c of mts.users) {
+      if (c.email === this.user.email) {
+        this.user = c;
+      }
+    }
     this.firstName = this.user.firstName;
     this.lastName = this.user.lastName;
     this.email = this.user.email;
