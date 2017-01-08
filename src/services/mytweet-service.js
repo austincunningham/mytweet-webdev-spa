@@ -60,15 +60,15 @@ export default class MyTweetService {
     };
     const status = {
       success: false,
-      message: ''
+      message: 'Message length greater than 140 characters'
     };
 
     tweet.date = Number(date);
     tweet.id = Math.floor(Math.random() * 1000000000);
     for (let i = 0; i < this.users.length; i++) {
-      if (this.user.email === this.users[i].email) {
+      if (this.user.email === this.users[i].email && tweet.message.length < 140 ) {
         status.success = true;
-        status.message = 'Tweet';
+        status.message = '';
         this.tweets.push(tweet);
         this.ac.post('/api/tweet/' + this.users[i]._id, tweet).then(res => {
           this.getTweets();

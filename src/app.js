@@ -35,9 +35,15 @@ export class App {
     });
 
     ea.subscribe(TweetStatus, msg => {
-      au.setRoot('home').then(() => {
-        this.router.navigateToRoute('report');
-      });
+      if (msg.status.success === true) {
+        au.setRoot('home').then(() => {
+          this.router.navigateToRoute('report');
+        });
+      /*} else {
+        au.setRoot('home').then(() => {
+          this.router.navigateToRoute('tweet');
+        });*/
+      }
     });
   }
 

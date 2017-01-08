@@ -4,7 +4,7 @@
 import {inject} from 'aurelia-framework';
 import MyTweetService from '../../services/mytweet-service';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {LoginStatus} from '../../services/messages';
+import {TweetStatus} from '../../services/messages';
 
 @inject( MyTweetService, EventAggregator)
 export class tweet {
@@ -13,6 +13,7 @@ export class tweet {
   date = new Date();
   users = [];
   tweets = [];
+  statusMessage = '';
 
   constructor(mts, ea) {
     this.myTweetService = mts;
@@ -22,6 +23,9 @@ export class tweet {
     this.tweets = mts.tweets;
     this.user = mts.user;
     this.ea = ea;
+    this.ea.subscribe(TweetStatus, msg => {
+      this.statusMessage = msg.status.message;
+    });
   }
 
   submitTweet() {
